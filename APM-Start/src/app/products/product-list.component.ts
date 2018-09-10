@@ -12,7 +12,8 @@ export class ProductListComponent implements OnInit {
     pageTitle: string = 'Page title??'
     imageWidth: number = 50
     imageMargin: number = 2
-    showImage: boolean = false;
+    showImage: boolean = false
+    errorMessage: any
 
     constructor(private productService: ProductService) { }
     
@@ -33,8 +34,14 @@ export class ProductListComponent implements OnInit {
     }
     
     ngOnInit() {
-        this.products = this.productService.getProducts()
-        this.filteredProducts = this.products   
+        this.productService.getProducts().subscribe(
+            products => {
+                this.products = products
+                this.filteredProducts = this.products 
+            },
+            error => this.errorMessage = <any>error
+        )
+          
     }
 
     performFilter(listFilter: string): IProduct[] {
