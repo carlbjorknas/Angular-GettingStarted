@@ -12,8 +12,17 @@ export class ProductListComponent implements OnInit {
     imageWidth: number = 50
     imageMargin: number = 2
     showImage: boolean = false;
-    listFilter: string = 'cart'
-
+    
+    _listFilter: string = 'cart'
+    get listFilter(): string {
+        return this._listFilter;
+    }
+    set listFilter(value: string){
+        this._listFilter = value;
+        this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+    }
+    
+    filteredProducts: IProduct[]
     products: IProduct[] = [
         {
             "productId": 1,
@@ -24,8 +33,8 @@ export class ProductListComponent implements OnInit {
             "price": 19.95,
             "starRating": 3.2,
             "imageUrl": "https://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
-          },
-          {
+        },
+        {
             "productId": 2,
             "productName": "Garden Cart",
             "productCode": "GDN-0023",
@@ -34,14 +43,19 @@ export class ProductListComponent implements OnInit {
             "price": 32.99,
             "starRating": 4.2,
             "imageUrl": "https://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
-          }
+        }
     ]
-
+    
     toggleImage(): void {
         this.showImage = !this.showImage;
     }
-
+    
     ngOnInit() {
         console.log('In ngOnInit in ProductListComponent')
+    }
+
+    performFilter(listFilter: string): IProduct[] {
+        return this.products.filter(product => 
+            product.productName.toLocaleLowerCase().indexOf(listFilter) >= 0)
     }
 }
