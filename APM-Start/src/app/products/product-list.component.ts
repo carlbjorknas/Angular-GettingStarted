@@ -12,8 +12,12 @@ export class ProductListComponent implements OnInit {
     imageWidth: number = 50
     imageMargin: number = 2
     showImage: boolean = false;
+
+    constructor() {
+        this.filteredProducts = this.products        
+    }
     
-    _listFilter: string = 'cart'
+    _listFilter: string
     get listFilter(): string {
         return this._listFilter;
     }

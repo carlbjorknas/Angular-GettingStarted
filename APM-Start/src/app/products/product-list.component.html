@@ -54,10 +54,10 @@
               </td>
               <td>{{ product.releaseDate }}</td>
               <td>{{ product.price | currency:'USD':'code':'1.2-2' }}</td>
-              <td>
-                <!-- <pm-star [rating]='product.starRating'
-                         (ratingClicked)='onRatingClicked($event)'>
-                </pm-star> -->
+              <td>                
+                <pm-star [rating]='product.starRating'>
+                         <!-- (ratingClicked)='onRatingClicked($event)'> -->                         
+                </pm-star>
               </td>
             </tr>
           </tbody>
