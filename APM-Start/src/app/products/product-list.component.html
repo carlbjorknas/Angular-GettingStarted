@@ -50,7 +50,7 @@
                 </a> -->
                 {{ product.productName }}
               </td>
-              <td>{{ product.productCode | lowercase }}
+              <td>{{ product.productCode | lowercase | convertToSpaces: '-' }}
                   
               </td>
               <td>{{ product.releaseDate }}</td>
